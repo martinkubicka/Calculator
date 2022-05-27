@@ -1,0 +1,27 @@
+Komunikačný kanál:
+	Discord
+
+Pravidlá komunikácie:
+	Žiadne vulgarizmy
+	Kontrola komunikačného kanálu 2x denne (ráno a večer)
+	Písanie vecí k téme - ostatné veci treba písať do kanálu #offtopic
+
+Systém pre správu verzí a hosting:
+	Git, Github (email ivs.kontrola@gmail.com bol pridaný)
+
+Termíny + rozdenie úloh:
+	16.03.2022 - Testy matematickej knihovne - Dominik Petřík (xpetri25)
+	23.03.2022 - Vytvorenie matematickej knihovne
+			- plus, mínus, umocňovanie, odmocňovanie - Matěj Macek (xmacek27)
+			- násobenie, delenie, faktoriál, fibonacciho postupnosť - Martin Kubička (xkubic45)
+	23.03.2022 - GUI - V tento deň bude meeting (čas a miesto budú upresnené), na ktorý si každý člen pripraví návrh GUI + naštuduje knihovnu PyQt5. Počas meetingu sa začne spoločne tvoriť GUI. Na meetingu prebehne code review doposiaľ vytvorených vecí.
+	30.03.2022. - GUI - Meeting (čas a miesto budú upresnené). Spoločná tvorba GUI. Na meetingu prebehne code review novo vytvoreného/zmeneného kódu.
+	30.03.2022 - Profiling + vytvorenie informácií o prevedenom profilingu - Martin Kubička (xkubic45)
+	02.04.2022 - Makefile - Matěj Macek (xmacek27)
+	06.04.2022 - Wizard - Dominik Petřík (xpetri25)
+	13.04.2022 - Uživateľská príručka - Dominik Petřík (xpetri25)
+	13.04.2022 - Meeting (čas a miesto budú upresnené) - Témou meetingu bude vytvorenie snímku obrazovky programu, mockup, plán vs skutočnosť, hodnotenie a code review
+	20.04.2022 - Meeting (čas a miesto budú upresnené) - Code review. Skúška nainštalovať a rozbehnúť program na inom zariadení. Kontrola požadovaných súborov.   
+
+
+
