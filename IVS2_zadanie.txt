@@ -1,0 +1,320 @@
+Projekt 2:
+
+Obsah
+
+Zadání
+Profiling
+Virtuální prostředí
+Volitelná rozšíření
+Tipy pro zlepšení výsledného hodnocení
+Týmy
+Přihlašování
+Struktura repozitáře
+Odevzdání
+Instalace u zákazníka (předvedení produktu)
+Obhajoby
+Hodnocení projektu
+Dotazy a konzultace
+Zadání
+
+Vytvořte kalkulačku se základními matematickými operacemi (+,-,*,/), faktoriálem, umocňováním s přirozenými exponenty (exponenty jsou přirozená čísla), obecnou odmocninou (obecná odmocnina) a jednou další funkcí.
+
+Program lze vytvořit v libovolném programovacím jazyce a bude se skládat z knihovny s matematickými funkcemi (vč. základních operací jako +,-,* apod.), nad kterou bude postaveno grafické uživatelské rozhraní.
+Součástí uživatelského rozhraní bude i nápověda.
+Program bude možné ovládat klávesnicí (min. základní operace).
+K programu bude dodána uživatelská i programová dokumentace.
+V uživatelské dokumentaci bude mimo jiné i postup instalace a odinstalace programu pomocí instalátoru (odinstalátoru).
+Dále bude uveden návod pro manuální (od)instalaci, tzn. postup překladu ze zdrojových kódů, vytvoření zástupců (ikonek) a dalších akcí, které provádí instalátor.
+Program bude distribuován s otevřenými zdrojovými texty pod licencí GNU GPL v. 1, 2 nebo 3).
+Doplňující podmínky:
+
+Preferovanou (ale nikoliv striktně vyžadovanou) platformou je Linux.
+Máte k dispozici virtuální prostředí, na kterých budeme projekt hodnotit (viz níže). Je nutné, aby program alespoň na jednom z testovacích virtuálních prostředí bez problémů fungoval vč. instalace a odinstalace. V dokumentaci a v README musí být uvedeno, které prostředí jste zvolili a jak v něm projekt zprovoznit.
+Pro správu verzí bude využit GIT, Mercurial či Bazaar. Povolené hostingy jsou ivs.fit.vutbr.cz, github.com, gitlab.com, bitbucket.com a merlin.fit.vutbr.cz (mimo sít VUT může být nutné využít VPN; před vytvořením repozitáře čtěte celé pokyny pro odevzdání!). Jiný systém či hosting pro správu verzí pouze po předchozí konzultaci. S CVS či SVN nelze získat plný počet bodů za projekt.
+Testy pro matematickou knihovnu vytváříme dříve než program podle konceptu Test-driven development.
+K matematické knihovně i k celému programu musí být vygenerována programová dokumentace. Preferovaný nástroj je Doxygen.
+Součástí bude Makefile pro kompilaci projektu, který bude obsahovat alespoň tyto cíle:
+all (přeloží projekt - včetně programu pro profiling)
+pack (zabalí projekt tak, aby mohl být odevzdán)
+clean (smaže všechny soubory, co nemají být odevzdány)
+test (spustí testy matematické knihovny)
+doc (spustí generování dokumentace)
+run (spustí program)
+profile (spustí překlad programu pro výpočet směrodatné odchylky na profiling)
+Při spuštění make bez uvedení cíle se provede make all.
+Je-li projekt vytvořený v MS Visual Studio ve Windows a využití Make pro překlad a/nebo generování dokumentace je problematické, dané cíle nemusí být vytvořeny - v takovém případě Makefile bude mít min. následující cíle:
+all (spustí progam)
+pack (zabalí projekt tak, aby mohl být odevzdán)
+clean (smaže všechny soubory, co nemají být odevzdány)
+run (spustí program - lze předpokládat, že jej před tím někdo manuálně zkompiluje ve VS)
+profile (spustí program pro výpočet směrodatné odchylky s ukázkovým testovacím vstupem)
+help (vypíše nápovědu s popisem, co je potřeba udělat před spuštěním programu)
+Při spuštění make bez uvedení cíle se provede make all.
+Makefile bude v obou výše uvedených případech určen pro GNU Make (pro Windows např. zde). Makefile pro Windows tedy musí využívat GNU make, ale příkazovou řádku Windows (tedy např. del místo rm). Výjimky mohou v dobře odůvodněných případech předem povolit cvičící, ale neměl by k nim být důvod (z Makefile lze spouštět Maven i jiné nástroje).
+Pokud to není nezbytně nutné (např. instalační cesty jako je /usr/bin), Makefile nebude obsahovat absolutní cesty.
+Bude-li to možné, Makefile nebude obsahovat jméno ani jednoho ze zdrojových souborů.
+Na kalkulačce si povinně vyzkoušíte debugging - odevzdáte snímek obrazovky debuggeru v matematické knihovně.
+K programu bude vytvořen mockup uživatelského rozhraní další verze kalkulačky (plánované do budoucna), která bude podporovat vědecký mód, vykreslování grafů a nějakou další potenciálně užitečnou funkci (výpočet BMI, stopky, statistické funkce, …). Musí být jasné, jak bude nová verze vypadat a fungovat, v případě potřeby vytvořte mockupů více.
+Profiling
+
+Pomocí funkcí z Vaší matematické knihovny vytvořte program (jako samostatný spustitelný soubor) pro výpočet výběrové směrodatné odchylky z posloupnosti čísel, kterou program čte ze standardního vstupu (v C např. pomocí funkce scanf) až do konce souboru a musí být schopen načíst min. 1000 čísel. Vstupní soubor obsahuje pouze čísla oddělená bílými znaky (mezera, konec řádku nebo tabulátor) a jejich počet není předem dán. Vzorec pro výběrovou směrodatnou odchylku, který bude využit:
+
+Výběrová směrodatná odchylka
+
+
+
+Příklad spuštění programu:
+
+./stddev < data.txt
+Tento program profilujte se vstupy o velikosti 10, 100 a 1000 číselných hodnot. Odevzdejte protokol obsahující výstup profileru a stručné shrnutí - ve kterých místech program tráví nejvíce času a uveďte, na co se při optimalizaci kódu nejlépe zaměřit.
+
+Doplňující podmínky:
+
+Počet vstupních čísel program detekuje automaticky - nesmí být vyžadováno jeho zadání. Při testování využijeme posloupnost náhodné délky.
+Výstupem programu je pouze jedno číslo - výběrová směrodatná odchylka - které program vypíše na standardní výstup.
+Program musí být možné přeložit pomocí přiloženého Makefile nebo musí být jasné, jak jej přeložit ve Visual studiu.
+Volitelné rozšíření za 1 bonusový bod:
+
+1 bonusový bod lze získat za smysluplné využití Profile-guided optimization (PGO), které povede ke zrychlení některé části Vaší knihovny (například výpočet odmocniny, goniometrických funkcí apod.).
+Virtuální prostředí
+
+Uživatelé/hesla do všech virtuálních prostředí: ivs
+
+Ve virtuálních prostředích pro vývoj můžete pracovat i na prvním projektu, jsou v nich připraveny všechny potřebné nástroje.
+
+Pro testování a hodnocení
+
+Ubuntu 20.04 - 64bit
+Windows 10 - 64bit
+Pro vývoj
+
+Pro vývoj ve Windows jsme Vám připravili ještě virtuální prostředí s MS Visual studio a Qt. Pro Linux s vývojovými nástroji, které studenti nejčastěji využívali v předchozích letech. Tato prostředí Vám můžou ušetřit práci s instalací, ale jejich využití je volitelné. Finální instalátor však musí fungovat na jednom z prostředí pro testování určených výše.
+
+Ubuntu 20.04 - 64bit
+Windows 10 - 64bit
+Všechna virtuální prostředí jsou ke stažení zde 
+Po rozbalení zip archivu s vybraným virtuálním prostředím přidáte toto prostředí do Virtualboxu pomocí položký Počítač --> Přidat (Machine --> Add), klávesová zkratka CTRL+A.
+
+Pokud budete mít ve virtuálním prostředí problémy se sítí, mělo by být možné je vyřešit tak, že v Nastavení Virtualboxu v části Síť nastavíte, že je karta 1 připojena k síťovému mostu (Bridged adapter) a v pokročilém (Advanced) nastavení zaškrtnete, že je síťový kabel připojen (Cable Connected).
+
+Vyjde-li v průběhu práce na projektu nová verze OS, neprovádějte aktualizaci distribuce (dist-upgrade).
+
+Doplňky pro hosta
+
+V prostředích nejsou nainstalovány doplňky pro hosta (Guest Additions). Pro snadnější práci je doporučeno je doinstalovat.
+
+Pro jejich instalaci vyberte po spuštění prostředí Zařízení --> Vložit obraz disku CD s přídavky pro hosta (Devices --> Insert Guest Additions CD Image).
+
+POZOR: Obraz disku, který je přiložen k Virtualboxu 5.2.6, případně 5.1.32 nepodporuje 3D akceleraci v Linuxu. Při použití těchto verzí je tedy nutné:
+
+buď vypnout 3D akceleraci v nastavení virtuálního prostředí (Nastavení --> Obrazovka --> Odšktnout "Povolit 3D akceleraci"; Settings --> Display --> "Enable 3D acceleration"),
+nebo stáhnout opravený obraz a doplňky pro hosta nainstalovat z něj.
+WSL 2
+
+VirtualBox 6 nefunguje, pokud je současně provozován i WSL 2. Pokud WSL 2 používáte, je třeba se po dobu řešení projektu dočasně vrátit k WSL 1 a deaktivovat některé funkce Windows. Pro převod distribude běžící pod WSL 2 na WSL 1 je třeba:
+
+Start --> vyhledávejte "features" ("vlastnosti" v české verzi) a vypněte Hyper-V, Windows Hypervisor Platform a Virtual Machine Platform. Pro dokončení bude třeba restartovat počítač.
+Po restartu v příkazovém řádku zadejte wsl --list --verbose pro získání seznamu distribucí a poté wsl --set-version 1 pro převední distribuce do WSL 1
+Pokud chcete nadále používat WSL2, můžete vyzkoušet importovat virtuální disky ze zip archivů do Hyper-V nebo do VMVare Workstation Player (je nutná minimálně verze 16, funguje pouze na procesorech Intel). Toto řešení je ale bez záruky a nemusí fungovat.
+
+Volitelná rozšíření
+
+Především studentům vyšších ročníků doporučujeme zadání rozšířit tak, aby pro ně projekt měl větší přínos. Příklady rozšíření:
+
+Výpočty se závorkami (aplikace znalostí z IFJ v praxi).
+Využití více číselných soustav (dvojková, šestnáctková, ...) - dynamické změny rozložení uživatelského rozhraní (skrývání a blokování tlačítek).
+Vykreslování grafů.
+Generování náhodných čísel (využívá se pro statistické výpočty).
+...
+Funkcionalita volitelných rozšíření není součástí hodnocení, ale může k ní být přihlédnuto při hodnocení jiné části projektu.
+
+Tipy pro zlepšení výsledného hodnocení:
+
+Kontrolujte práci ostatních (např. se dohodněte tak, že každý úkol 1 člen týmu plní a 2. kontroluje).
+Doxyfile vytvoří každý člen týmu nezávisle, pak si je porovnáte a nejlepší využijete.
+Na mockupu budou pracovat všichni členové týmu.
+Týmy
+
+Projekt budou řešit tří až čtyřčlenné týmy. Každý tým si zvolí název (můžete být vtipní, ale buďte slušní, pohybujte se v mezích zákona a vyhýbejte se názvům známých firem - vyzkoušejte, co pro zvolený název najde Google) a vedoucího, který bude tým zastupovat při komunikaci s vyučujícími.
+Práci na projektu je nutné rozdělit mezi členy týmu (pokud možno rovnoměrně).
+Dvoučlenné týmy jsou zakázané. Výjimka může být udělena pouze v případě, že v předmětu nebude zapsaný žádný student bez týmu. V případě, že nemůžete najít kolegy do týmu, inzerujte na fóru předmětu v IS FIT.
+Přihlašování
+
+Registrace týmu musí být provedena do 3. 3. 2022 5. 3. 2022 7:00 ráno.
+
+Přihlašování týmů bude realizováno v IS FIT. Bude-li s přihlášením problém, lze jej provést e-mailem, který vedoucí týmu zašle na adresu dytrych@fit.vutbr.cz:
+předmět (xlogin01 je login vedoucího): "IVS - projekt - xlogin01 xlogin02 xlogin03 xlogin04"
+obsah: 
+Přihlášení na projekt do IVS
+Tým: název týmu
+Vedoucí: Jméno Příjmení xlogin01@stud.fit.vutbr.cz
+Členové:
+Jméno Příjmení xlogin01@stud.fit.vutbr.cz
+Jméno Příjmení xlogin02@stud.fit.vutbr.cz
+...
+Ostatní členové týmu budou uvedeni také v seznamu příjemců kopie zprávy, aby věděli, že jsou přihlášeni.
+Struktura repozitáře
+
+Kostra repozitáře ke stažení je k dispozici zde. Nezapomeňte ukázkové soubory nahradit svými - pokud se soubor bude shodovat s ukázkovým, bude se počítat jako kdyby nebyl odevzdán. Kapitoly dokumentace jsou rovněž ukázkové (nemusí být správně) - udělejte svoji dokumentaci podle přednášky.
+mockup/
+  *.png|jpg|svg|pdf
+plan/
+profiling/
+  vystup.*
+  zprava.txt|pdf
+src/
+  zdrojový kód a testy
+  Makefile
+  Doxyfile
+  zdrojový kód pro profiling
+debugging.png|jpg|pdf|txt
+dokumentace.pdf
+screenshot.png|jpg
+skutecnost.txt
+hodnoceni.txt
+README.md|txt
+.gitignore
+.editorconfig
+Soubor hodnoceni.txt
+
+Soubor hodnoceni.txt bude obsahovat osobní ohodnocení jednotlivých členů týmu v rozsahu 0-300 % či 0-400 % (dle počtu členů týmu a dle aktivity člena týmu a jeho přínosu pro projekt). Součet všech osobních ohodnocení musí být max. stonásobek počtu členů týmu. Hodnocení musejí odsouhlasit všichni členové týmu. Soubor bude ve formátu (X je počet procent od 0 do 400):
+
+xlogin01 X (skutečně řešená část projektu)
+xlogin02 X (skutečně řešená část projektu)
+xlogin03 X (skutečně řešená část projektu)
+xlogin04 X (skutečně řešená část projektu)
+Příklad:
+
+xlogin01 100 (základ GUI a základní mat. operace)
+xlogin02 100 (pokročilé mat. operace)
+xlogin03 90 (profiling, instalátor)
+xlogin04 110 (testy, dokumentace)
+Pokud by student přerozdělením bodů přesáhl maximum za celý projekt, body se oříznou na maximum 52 bodů.
+
+Tento soubor je zpracováván automaticky, nedodržení struktury může vést na hodnocení nula bodů.
+
+Soubor README.md nebo README.txt
+
+Soubor bude v patičce povinně obsahovat alespoň následující informace. V části “Prostředí” uveďte pouze řádky s vybranými prostředími, ve kterých je projekt plně funkční (při hodnocení bude náhodně vybráno jedno z uvedených prostředí).
+
+Prostredi
+---------
+
+Ubuntu 64bit
+Windows 64bit
+
+Autori
+------
+
+Nazev tymu
+- xlogin01 jmeno prijmeni 
+- xlogin02 jmeno prijmeni 
+- xlogin03 jmeno prijmeni 
+- xlogin04 jmeno prijmeni 
+
+Licence
+-------
+
+Tento program je poskytovan...
+
+Odevzdání
+
+Věnujte prosím pozornost postupu odevzdání a dodržujte názvy souborů a další stanovené podmínky. Pro desítky projektů není v našich silách za pomoci správce prohledávat domovské adresáře na serveru ivs (častá chyba z předchozích let je odevzdání na toto místo) a jiná umístění, kde by se mohly nacházet odevzdané soubory. Značnou komplikací jsou i nesprávné názvy složek apod. Při hodnocení budou využívány i automatické skripty.
+
+Do 18. 3. 2022 7:00 ráno vedoucí týmu v IS FIT odevzdá předběžný plán projektu v souboru xlogin01_xlogin02_xlogin03_xlogin04_plan.txt. Soubor bude obsahovat:
+stanovené termíny,
+přidělení úkolů na projektu jednotlivým řešitelům,
+zvolené komunikační kanály pro komunikaci v týmu a stanovená pravidla pro komunikaci (jsou-li nějaká),
+zvolený systém pro správu verzí a hosting + informaci, jak do repozitáře mohou nahlédnout vyučující/cvičící (viz níže).
+Alternativně lze odevzdat archiv xlogin01_xlogin02_xlogin03_xlogin04_plan.zip, který bude obsahovat libovolný počet souborů xlogin01_xlogin02_xlogin03_xlogin04_plan* ("*" zastupuje libovolný počet libovolných znaků, tedy např. ".mpp" či "01.jpg"), přičemž plán zde může být vytvořený v MS Projectu či jiném programu (není-li daný program ve škole dostupný, je nutno odevzdat i exportovanou verzi v PDF či jpg).
+
+Repozitář bude průběžně kontrolován vyučujícími/cvičícími, aby Vám bylo možné poskytnout zpětnou vazbu, zda jste jej využívali správným způsobem. Máte-li repozitář na serveru ivs.fit.vutbr.cz, vyučující se do něj dostanou bez problémů. Využijete-li github, gitlab či bitbucket, je třeba přidělit oprávnění pro uživatele ivskontrola (e-mail má ivs.kontrola@gmail.com, ale na tento e-mail prosím nic nezasílejte - byl vytvořen pouze pro účely vytvoření účtu na výše uvedených serverech). Při vytváření repozitáře na serveru merlin.fit.vutbr.cz je nutné k Vašim loginům přidat loginy všech cvičících: “dytrych, ibartl, iveigend, idolezal, ifajcik, imalik”.
+
+Do 29. 4. 2022 7:00 ráno vedoucí týmu odevzdá:
+obsah repozitáře projektu (viz struktura výše) - tímto není myšlena pracovní kopie, ale kopie repozitáře (včetně historie),
+instalátor programu, který kromě samotného programu nainstaluje i odinstalátor,
+vygenerovanou programovou dokumentaci.
+Vše bude v jednom adresáři xlogin01_xlogin02_xlogin03_xlogin04, který bude sbalený do archivu xlogin01_xlogin02_xlogin03_xlogin04.zip.
+Zkontrolujte, zda repozitář obsahuje vše potřebné:
+uživatelskou příručku v PDF,
+snímek obrazovky programu,
+testy k matematické knihovně,
+snímek obrazovky debuggeru či popis postupu debuggingu,
+mockup(y) další verze kalkulačky,
+informace o provedeném profilingu (v .txt, .pdf či obrázku),
+soubor skutecnost.txt, který bude obsahovat informace o rozdílech mezi plánem projektu a skutečností,
+soubor hodnoceni.txt (s obsahem viz výše).
+Struktura adresáře v odevzdávaném archivu
+
+doc/
+  vygenerovaná programová dokumentace
+install/
+  instalátory
+repo/
+  repozitář (musí být pracovní kopie i historie, tedy např. i složka .git)
+Archiv se odevzdává do adresáře /ivs-proj2/odevzdane/xlogin01 (kde xlogin01 je login vedoucího týmu) na serveru ivs.fit.vutbr.cz. Odevzdání do jiného adresáře (např. do /home/xlogin01 či /home/xlogin01/ivs-proj2/...) bude značně penalizováno. Je-li vedoucí neaktivní, zvolte si včas nového a oznamte změnu cvičícím, aby mu mohl být vytvořen adresář pro odevzdání.
+
+Do IS FIT uložíte archiv, který bude obsahovat
+hodnoceni.txt
+zdrojové soubory programu,
+uživatelskou příručku (nebude-li příliš velká),
+soubor odevzdani.txt, ve kterém bude uvedeno datum, čas a způsob odevzdání kompletního archivu a informace o tom, jaké další soubory jsou v něm obsaženy.
+Každý člen týmu do 21. 5. 2022 7:00 ráno v IS FIT odevzdá soubor xloginNN_problemy.txt, který bude obsahovat seznam problémů, které podle daného člena týmu tým měl, včetně pravděpodobných příčin a navrhovaných řešení (co jste mohli udělat lépe). Pokud tým žádné problémy neměl, budou zde uvedeny pouze návrhy, co by bylo možné při příštím týmovém projektu řešit lépe. Povinně je nutné uvést nejméně 3 problémy či návrhy seřazené od nejdůležitějšího po nejméně důležitý. Zaměřte se při tom na následující oblasti:
+
+komunikace v týmu (Využili jste vhodné komunikační kanály? Stanovili jste si pravidla a dodržovali je? Komunikovali všichni? ...)
+spolupráce (Dělal každý to, co měl? Bylo možné se dohodnout, nebo si někdo prosazoval svoje za každou cenu? ...)
+vedení týmu (Dělal vedoucí to, co měl? Měl vedoucí autoritu? ...)
+termíny (Naplánovali jste si práci dobře? Začali jste včas? ...)
+aktivita (Byla v týmu nějaká iniciativa, nebo všichni čekali, až někdo něco udělá?)
+nástroje (Zvolili jste vhodné prostředky pro sdílení dat? Zvolili jste vhodné vývojářské nástroje? Měli jste s něčím problémy? ...)
+Instalace u zákazníka
+
+V období mezi odevzdáním a obhajobami bude možnost provést tzv. instalaci u zákazníka. Bude zde simulována reálná situace, kdy jdete produkt nainstalovat k zákazníkovi, který si jej objednal, a stručně mu jej předvést.
+Instalace proběhne v laboratoři ve zvoleném termínu (přihlašování na termíny bude v IS FIT), a to tak, že vybraný zástupce týmu či celý tým přijde k PC s vybraným virtuálním strojem, do kterého nainstaluje produkt z odevzdaného instalátoru. Pokud instalátor nebyl odevzdán, produkt zprovozní ze zdrojových textů, přičemž může využít i jeden z virtuálních strojů pro vývoj. Cvičící si produkt následně otestuje, nebo si nechá předvést předem dané testovací scénáře.
+Je doporučeno předem vyzkoušet, zda na verzi VirtualBoxu v CVT Vaše řešení poběží korektně.
+Na instalaci je čas max. 1 hod. - poté je nutné předvést výsledek cvičícímu nebo předat PC dalšímu týmu.
+Samotná instalace (ve smyslu osobní návštěvy laboratoře a jejího provedení) není hodnocena, nicméně může vést k lepšímu hodnocení instalátoru (pokud cvičící při hodnocení neprovede nějaký krok, kvůli kterému se instalace nezdaří, ...) i výsledného produktu (pokud je nějaká funkce neintuitivní, cvičící ji nemusí objevit a ohodnotit).
+Tým, který produkt nenainstaluje (ať už protože se na instalace nepřihlásil, nepřišel, nebo byl na místě neúspěšný), ponechává test produktu plně na cvičících. V takovém případě nelze reklamovat hodnocení instalátoru a možnost reklamace hodnocení funkčnosti programu bude omezená.
+Technické pokyny pro zdárný průběh instalací u zákazníka
+Instalace letos proběhnou potřetí, a to v reakci na problémy z předchozích let, kdy se asi 4 produkty z 82 cvičícím nepodařilo zprovoznit (většinou z důvodu, že bylo nutné provést nějaký nezdokumentovaný krok, nainstalovat nějakou závislost apod.) a u pár dalších se projevily problémy způsobené tím, že program očekával jinou verzi knihoven apod. Reklamace pak probíhaly po obhajobách na noteboocích za podmínek, které byly nekomfortní pro studenty i cvičící. Využijte proto možnost svůj produkt sami předvést a předejděte případným reklamacím. Dobře udělaný produkt lze nainstalovat a předvést během 10-15 minut.
+
+Obhajoby
+
+Obhajoby jsou povinné a za kvalitně připravenou obhajobu lze získat až 5 bodů. Získáte také zkušenosti s prezentací a zpětnou vazbu k projektu i k prezentaci.
+Přihlašování na obhajoby, které proběhnou ve zkouškovém období, bude přes IS FIT. Přihlašuje se pouze vedoucí týmu (vedoucí přihlásí celý tým).
+K obhajobě bude mít každý tým jednu prezentaci v PDF, kterou odevzdá do IS FIT nejpozději den před obhajobou. Název souboru s prezentací musí začínat loginem vedoucího týmu. Jako záložní variantu si přineste prezentaci na obhajobu na USB flash.
+První část prezentace (max. 1,5 min.) bude věnována vytvořenému řešení, následující části budou věnovány získaným zkušenostem při práci v týmu. Celková doba prezentace nesmí překročit 6 min.
+Při prezentování se povinně vystřídají všichni členové týmu.
+Při nerovnoměrném hodnocení členů týmu bude prezentace obsahovat krátké zdůvodnění tohoto hodnocení, ke kterému se mohou vyjádřit dotčení členové týmu.
+Po prezentaci následuje krátká diskuse a zhodnocení projektu vyučujícím, při kterém se ihned dozvíte bodové hodnocení.
+Obhajoby jsou veřejné. Po skončení obhajob budou diskutovány nejčastější chyby v projektech a případný zbývající čas bude věnován prostoru pro vzájemnou výměnu zkušeností (kdokoliv může dobrovolně prezentovat zkušenosti z práce na projektu, ze kterých plyne ponaučení do dalších projektů).
+Z obhajob je pořizován záznam a můžete se tedy podívat, jak Vaše vystoupení působí a co byste měli do budoucna zlepšit.
+Vzhledem ke zveřejnění záznamu je vhodné se v prezentacích vyhnout využití licencovaných fotografií a jiných autorských děl 3. stran.
+Vstupem do obhajovací místnosti souhlasíte s pořízením a zveřejněním záznamu (veřejně přístupný záznam na webu FIT). Nesouhlasíte-li, nevstupujte prosím a e-mailem si dohodněte konzultace, kde individuálně zvolíme náhradní řešení (např. náhradní individuální projekt za 5 bodů, jehož hodnocení bude podmíněno nenulovým hodnocením týmového projektu, nebo obhajoba v zasedací místnosti před rozšířenou komisí složenou z min. 5 zaměstnanců fakulty) - historicky se zatím nikdo takový nenašel.
+Hodnocení projektu
+
+Části projektu hodnocené pro celý tým dohromady
+
+2 body za vytvoření repozitáře a zpřístupnění vyučujícím,
+25 bodů za funkční a kompletní výsledný produkt (matematická knihovna s testy, program, instalátor, odinstalátor a dokumentace),
+3 body za naplánování a rozdělení práce,
+3 body za Makefile,
+2 body za debugging,
+3 body za mockup další verze programu,
+1 bod za vyhodnocení rozdílů mezi plánem projektu a skutečností,
+4 body za profiling.
+Celý tým může získat 43 * počet členů týmu = 129 nebo 172 bodů.
+
+Hodnocení každého člena týmu
+
+2 body za vhodné využívání systému pro správu verzí,
+43 bodů za produkt dle Vašeho hodnocení (43 * počet % * 0.01),
+2 body za zhodnocení práce v týmu (za zamyšlení nad tím, co jste dělali špatně a jak to řešit lépe),
+5 bodů za obhajobu.
+Celkem může každý člen týmu za projekt získat 52b. 
+Dotazy a konzultace
+
+Pro dotazy přednostně využívejte fórum v IS FIT.
+Dotazy, které nechcete zveřejnit (např. ke konkrétnímu řešení projektu), můžete zaslat i na e-mail dytrych@fit.vut.cz nebo můžete přijít na osobní konzultaci.
+
+
